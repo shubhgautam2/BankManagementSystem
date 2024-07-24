@@ -1,0 +1,10 @@
+package app08;
+
+public class DataType_Demo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

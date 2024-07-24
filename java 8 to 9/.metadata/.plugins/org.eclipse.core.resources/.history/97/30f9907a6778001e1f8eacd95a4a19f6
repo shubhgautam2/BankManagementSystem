@@ -1,0 +1,24 @@
+package app03;
+import java.util.*;
+public class Test {
+
+	public static void main(String[] args) {
+		String name;
+		int age;
+		double height;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter your name");
+		name=sc.next();
+		System.out.println("Enter your age");
+		age=sc.nextInt();
+		System.out.println("Enter your height");
+		height=sc.nextDouble();
+		System.out.println("Name is ="+ name);
+		System.out.println("Age is ="+ age);
+		System.out.println("Height is ="+ height);
+		
+		
+
+	}
+
+}

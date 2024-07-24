@@ -1,0 +1,20 @@
+package app03;
+
+public class SizeDemo {
+
+	public static void main(String[] args) {
+		System.out.println("Min Byte Value = " + Byte.MIN_VALUE);
+		System.out.println("Max Byte Value = " + Byte.MAX_VALUE);
+		System.out.println("Min Short Value = " + Byte.MIN_VALUE); 
+		System.out.println("Max Short Value = " + Byte.MAX_VALUE); 
+		System.out.println("Min I Value = " + Int.MIN_VALUE);
+		System.out.println("Min Byte Value = " + Int.MAX_VALUE);
+		System.out.println("Min Byte Value = " + Byte.MIN_VALUE);
+		System.out.println("Min Byte Value = " + Byte.MAX_VALUE);
+		System.out.println("Min Byte Value = " + Byte.MIN_VALUE);
+		System.out.println("Min Byte Value = " + Byte.MAX_VALUE);
+		System.out.println("Min Byte Value = " + Byte.MIN_VALUE);
+		System.out.println("Min Byte Value = " + Byte.MAX_VALUE);
+	}
+
+}

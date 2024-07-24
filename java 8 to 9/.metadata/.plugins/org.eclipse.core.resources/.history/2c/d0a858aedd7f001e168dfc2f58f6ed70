@@ -1,0 +1,18 @@
+package app07;
+
+public class Student {
+	int sid;
+	String name;
+
+	public static void main(String[] args) {
+		int sid=1;
+		System.out.println(sid);
+		Student st=new Student();
+		st.sid=101;
+		st.name= "Shivam";
+		System.out.println("Name is"+st.name+"Stufdentid is"+st.sid);
+		
+
+	}
+
+}

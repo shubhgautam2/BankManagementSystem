@@ -1,0 +1,10 @@
+package app04_Prime_Number;
+
+public class ForTestPattern {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
