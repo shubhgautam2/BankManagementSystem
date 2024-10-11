@@ -1,107 +1,118 @@
-package bank;
+package bank; // button press hote ha ham action performed me ajate ha 
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.sql.*;
 
 public class Login extends JFrame implements ActionListener{
-	// Instance variable
-	JLabel l1, l2, l3;
-	JTextField tf1;
-	JPasswordField pf1;
-	JButton btnLogin, btnClear, btnSignup;
+    JLabel l1,l2,l3;
+    JTextField tf1;
+    JPasswordField pf2;
+    JButton b1,b2,b3;
+  
+   public Login(){
+        setTitle("AUTOMATED TELLER MACHINE");
+        
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("Icons/imgF.jpg"));
+        Image i2 = i1.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+        ImageIcon i3 = new ImageIcon(i2);
+        JLabel l11 = new JLabel(i3);
+        l11.setBounds(70, 10, 100, 100);
+        add(l11);
+        
+        l1 = new JLabel("WELCOME TO ATM");
+        l1.setFont(new Font("Osward", Font.BOLD, 38));
+        l1.setBounds(200,40,450,40);
+        add(l1);
+        
+        l2 = new JLabel("Card No:");
+        l2.setFont(new Font("Raleway", Font.BOLD, 28));
+        l2.setBounds(125,150,375,30);
+        add(l2);
+        
+        tf1 = new JTextField(15);
+        tf1.setBounds(300,150,230,30);
+        tf1.setFont(new Font("Arial", Font.BOLD, 14));
+        add(tf1);
+        
+        l3 = new JLabel("PIN:");
+        l3.setFont(new Font("Raleway", Font.BOLD, 28));
+        l3.setBounds(125,220,375,30);
+        add(l3);
+        
+        pf2 = new JPasswordField(15);
+        pf2.setFont(new Font("Arial", Font.BOLD, 14));
+        pf2.setBounds(300,220,230,30);
+        add(pf2);
+                
+        b1 = new JButton("login");
+        b1.setBackground(Color.white);
+        b1.setForeground(Color.black);
+        
+        b2 = new JButton("CLEAR");
+        b2.setBackground(Color.white);
+        b2.setForeground(Color.black);
+        
+        b3 = new JButton("SIGN UP");
+        b3.setBackground(Color.white);
+        b3.setForeground(Color.black);
+        
+        setLayout(null);
+        
+        b1.setFont(new Font("Arial", Font.BOLD, 14));
+        b1.setBounds(300,300,100,30);
+        add(b1);
+        
+        b2.setFont(new Font("Arial", Font.BOLD, 14));
+        b2.setBounds(430,300,100,30);
+        add(b2);
+        
+        b3.setFont(new Font("Arial", Font.BOLD, 14));
+        b3.setBounds(300,350,230,30);
+        add(b3);
+        
+        b1.addActionListener(this);
+        b2.addActionListener(this);
+        b3.addActionListener(this);
+        
+        getContentPane().setBackground(Color.WHITE);
+        
+        setSize(800,480);
+        setLocation(300,200);
+        setUndecorated(true);
+        setVisible(true);
+        
+    }
+    public void actionPerformed(ActionEvent ae){
+        try{        
+            if(ae.getSource()==b1){
+                Conn c1 = new Conn();
+                String cardno  = tf1.getText();
+                String pin  = pf2.getText();
+                String q  = "select * from Login where cardnumber = '"+cardno+"' and pin = '"+pin+"'";
 
-	// Non-Parameterized Constructor
-	public Login() {
-		setTitle("Bank Management System");
-		setLayout(null);
+                ResultSet rs = c1.s.executeQuery(q);
+                if(rs.next()){
+                    setVisible(false);
+                    new Transactions(pin).setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Incorrect Card Number or PIN");
+                }
+            }else if(ae.getSource()==b2){
+                tf1.setText("");
+                pf2.setText("");
+            }else if(ae.getSource()==b3){
+                setVisible(false);
+                new Signup().setVisible(true);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static void main(String[] args){
+        new Login().setVisible(true);
+    }
 
-		l1 = new JLabel("Welcome To Bank System");
-		l1.setFont(new Font("Arial", Font.BOLD, 35));
-		l1.setBounds(200, 40, 530, 40);
-		add(l1);
-
-		l2 = new JLabel("Enter Card No:");
-		l2.setFont(new Font("Tahoma", Font.BOLD, 25));
-		l2.setBounds(120, 150, 400, 30);
-		add(l2);
-
-		l3 = new JLabel("Enter Password:");
-		l3.setFont(new Font("Tahoma", Font.BOLD, 25));
-		l3.setBounds(120, 210, 400, 30);
-		add(l3);
-
-		tf1 = new JTextField(20);
-		tf1.setBounds(340, 150, 230, 30);
-		tf1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		add(tf1);
-
-		pf1 = new JPasswordField(20);
-		pf1.setBounds(340, 210, 230, 30);
-		pf1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		add(pf1);
-
-		btnLogin = new JButton("LOGIN");
-		btnLogin.setBackground(Color.black);
-		btnLogin.setForeground(Color.white);
-		btnLogin.setBounds(200, 250, 100, 20);
-		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 15));
-		add(btnLogin);
-
-		
-		btnClear=new JButton("CLEAR");
-		btnClear.setBackground(Color.black);
-		btnClear.setForeground(Color.white);
-		btnClear.setBounds(310,250,100,20);
-		btnClear.setFont(new Font("Tahoma",Font.BOLD,15));
-		add(btnClear);
-		 
-
-		btnSignup = new JButton("SIGN UP");
-		btnSignup.setBackground(Color.black);
-		btnSignup.setForeground(Color.white);
-		btnSignup.setBounds(420, 250, 100, 20);
-		btnSignup.setFont(new Font("Tahoma", Font.BOLD, 15));
-		add(btnSignup);
-		
-		btnLogin.addActionListener(this);
-		btnSignup.addActionListener(this);
-		btnClear.addActionListener(this);
-		
-
-		getContentPane().setBackground(Color.white);
-		setVisible(true);
-		setSize(800, 500);
-		setLocation(400, 200);
-	}
-
-	public static void main(String[] args) {
-		Login obj = new Login();
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent ae) {
-		try {
-			if(ae.getSource()==btnLogin){				
-			}
-			else if(ae.getSource()==btnClear){
-				tf1.setText("");
-				pf1.setText("");
-			}
-			else if(ae.getSource()==btnSignup){
-				this.setVisible(false);
-				new Signup();
-			}
-		}
-		catch(Exception e){
-			
-		}
-	}
+    
 }
